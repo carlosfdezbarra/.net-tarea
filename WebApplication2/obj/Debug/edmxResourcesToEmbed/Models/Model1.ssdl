@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="testModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AUTOS">
+    <Key>
+      <PropertyRef Name="ID_AUTO" />
+    </Key>
+    <Property Name="ID_AUTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_MODELO" Type="varchar" MaxLength="100" />
+    <Property Name="PATENTE" Type="varchar" MaxLength="100" />
+    <Property Name="ANO" Type="int" />
+    <Property Name="COLOR" Type="varchar" MaxLength="100" />
+    <Property Name="OBSERVACION" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="CARGOS">
+    <Key>
+      <PropertyRef Name="ID_CARGO" />
+    </Key>
+    <Property Name="ID_CARGO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="MARCA">
+    <Key>
+      <PropertyRef Name="ID_MARCA" />
+    </Key>
+    <Property Name="ID_MARCA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="MODELO">
+    <Key>
+      <PropertyRef Name="ID_MODELO" />
+    </Key>
+    <Property Name="ID_MODELO" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ID_MARCA" Type="int" />
+    <Property Name="DESCRIPCION_MODELO" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Persona">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rut" Type="varchar" MaxLength="20" />
+    <Property Name="nombre" Type="varchar" MaxLength="300" />
+    <Property Name="apellido" Type="varchar" MaxLength="400" />
+    <Property Name="edad" Type="int" />
+  </EntityType>
+  <EntityType Name="TRABAJADOR">
+    <Key>
+      <PropertyRef Name="ID_TRABAJADOR" />
+    </Key>
+    <Property Name="ID_TRABAJADOR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_CARGO" Type="int" />
+    <Property Name="RUT_TRABAJADOR" Type="varchar" MaxLength="20" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="100" />
+    <Property Name="APELLIDOS" Type="varchar" MaxLength="300" />
+    <Property Name="EDAD" Type="int" />
+  </EntityType>
+  <Association Name="FK__AUTOS__ID_MODELO__34C8D9D1">
+    <End Role="MODELO" Type="Self.MODELO" Multiplicity="0..1" />
+    <End Role="AUTOS" Type="Self.AUTOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MODELO">
+        <PropertyRef Name="ID_MODELO" />
+      </Principal>
+      <Dependent Role="AUTOS">
+        <PropertyRef Name="ID_MODELO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MODELO__ID_MARCA__2C3393D0">
+    <End Role="MARCA" Type="Self.MARCA" Multiplicity="0..1" />
+    <End Role="MODELO" Type="Self.MODELO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MARCA">
+        <PropertyRef Name="ID_MARCA" />
+      </Principal>
+      <Dependent Role="MODELO">
+        <PropertyRef Name="ID_MARCA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TRABAJADO__ID_CA__2D27B809">
+    <End Role="CARGOS" Type="Self.CARGOS" Multiplicity="0..1" />
+    <End Role="TRABAJADOR" Type="Self.TRABAJADOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CARGOS">
+        <PropertyRef Name="ID_CARGO" />
+      </Principal>
+      <Dependent Role="TRABAJADOR">
+        <PropertyRef Name="ID_CARGO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="testModelStoreContainer">
+    <EntitySet Name="AUTOS" EntityType="Self.AUTOS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CARGOS" EntityType="Self.CARGOS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MARCA" EntityType="Self.MARCA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MODELO" EntityType="Self.MODELO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TRABAJADOR" EntityType="Self.TRABAJADOR" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__AUTOS__ID_MODELO__34C8D9D1" Association="Self.FK__AUTOS__ID_MODELO__34C8D9D1">
+      <End Role="MODELO" EntitySet="MODELO" />
+      <End Role="AUTOS" EntitySet="AUTOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MODELO__ID_MARCA__2C3393D0" Association="Self.FK__MODELO__ID_MARCA__2C3393D0">
+      <End Role="MARCA" EntitySet="MARCA" />
+      <End Role="MODELO" EntitySet="MODELO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TRABAJADO__ID_CA__2D27B809" Association="Self.FK__TRABAJADO__ID_CA__2D27B809">
+      <End Role="CARGOS" EntitySet="CARGOS" />
+      <End Role="TRABAJADOR" EntitySet="TRABAJADOR" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

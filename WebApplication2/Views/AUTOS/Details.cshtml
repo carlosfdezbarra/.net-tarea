@@ -1,0 +1,59 @@
+﻿@model WebApplication2.Models.AUTOS
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalle</h2>
+
+<div>
+    <br/>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Patente
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PATENTE)
+        </dd>
+
+        <dt>
+            Año
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ANO)
+        </dd>
+
+        <dt>
+            Color
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COLOR)
+        </dd>
+
+        <dt>
+            Observación
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OBSERVACION)
+        </dd>
+
+        <dt>
+            Modelo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MODELO.DESCRIPCION_MODELO)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_AUTO }) |
+    @Html.ActionLink("Volver", "Index")
+</p>
