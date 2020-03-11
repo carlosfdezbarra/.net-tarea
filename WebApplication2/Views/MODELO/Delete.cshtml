@@ -1,0 +1,41 @@
+﻿@model WebApplication2.Models.MODELO
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Eliminar modelo</h2>
+
+<h4>Está seguro de eliminar este modelo?</h4>
+<div>
+    <br/>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Modelo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCRIPCION_MODELO)
+        </dd>
+
+        <dt>
+            Marca
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MARCA.DESCRIPCION)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Volver", "Index")
+        </div>
+    }
+</div>

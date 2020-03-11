@@ -1,0 +1,35 @@
+﻿@model WebApplication2.Models.MODELO
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalle</h2>
+
+<div>
+    <br/>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Modelo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCRIPCION_MODELO)
+        </dd>
+
+        <dt>
+            Marca
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MARCA.DESCRIPCION)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_MODELO }) |
+    @Html.ActionLink("Volver", "Index")
+</p>

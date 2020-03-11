@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebApplication2.Models.MODELO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Modelos</h2>
+
+<p>
+    @Html.ActionLink("Agregar modelo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Modelo
+        </th>
+        <th>
+            Marca
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCRIPCION_MODELO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MARCA.DESCRIPCION)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.ID_MODELO }) |
+            @Html.ActionLink("Detalle", "Details", new { id=item.ID_MODELO }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.ID_MODELO })
+        </td>
+    </tr>
+}
+
+</table>

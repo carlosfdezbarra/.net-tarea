@@ -145,7 +145,7 @@ namespace WebApplication2.Controllers
                     aUTOS.OBSERVACION = "SIN OBSERVACIONES";
                 }
                 var patejemplo = db.AUTOS.Where(x => x.PATENTE == aUTOS.PATENTE);
-                if (patejemplo.Count() == 1)
+                if (patejemplo.Count() < 1)
                 {
 
                     int datefecha = DateTime.Now.Year;
@@ -181,6 +181,7 @@ namespace WebApplication2.Controllers
                     {
                         ViewBag.ID_MODELO = new SelectList(db.MODELO, "ID_MODELO", "DESCRIPCION_MODELO", aUTOS.ID_MODELO);
                         ModelState.AddModelError("PATENTE", "Patente ya registrada");
+                        return View(aUTOS);
                     }
 
 

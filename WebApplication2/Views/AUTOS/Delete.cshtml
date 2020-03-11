@@ -5,15 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
+<h2>Eliminar autos</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Está seguro de eliminar este auto?</h3>
 <div>
     <h4>AUTOS</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.PATENTE)
+            Patente
         </dt>
 
         <dd>
@@ -21,7 +21,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ANO)
+            Año
         </dt>
 
         <dd>
@@ -29,7 +29,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.COLOR)
+            Color
         </dt>
 
         <dd>
@@ -37,7 +37,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.OBSERVACION)
+            Observación
         </dt>
 
         <dd>
@@ -45,7 +45,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MODELO.DESCRIPCION_MODELO)
+            Modelo
         </dt>
 
         <dd>
@@ -58,8 +58,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Volver", "Index")
         </div>
     }
 </div>
