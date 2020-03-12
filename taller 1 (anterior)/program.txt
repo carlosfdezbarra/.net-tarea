@@ -1,0 +1,100 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Persona> personas = new List<Persona>();
+            int opcion = 1;
+
+            while(opcion != 4)
+            {
+                Console.WriteLine("1.- INGRESAR DATOS");
+                Console.WriteLine("2.- LISTAR DATOS");
+                Console.WriteLine("3.- BUSCAR PERSONA POR RUT");
+
+                opcion = int.Parse(Console.ReadLine());
+
+                if (opcion == 1)
+                {
+                    Persona p = new Persona();
+
+                    Console.WriteLine("INGRESAR RUT");
+                    p.Rut = Console.ReadLine();
+
+                    Console.WriteLine("INGRESAR NOMBRE");
+                    p.Nombre = Console.ReadLine();
+
+                    Console.WriteLine("INGRESAR APELLIDO");
+                    p.Apellido = Console.ReadLine();
+
+                    Console.WriteLine("INGRESAR EDAD");
+                    p.Edad = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("INGRESAR NOTAS");
+                    p.Notas = new List<int>();
+                    for (int i = 1; i<4; i++)
+                    {
+                        Console.WriteLine("Ingrese " + i + "° nota:");
+                        p.Notas.Add(int.Parse(Console.ReadLine()));
+
+                    }
+
+                    personas.Add(p);
+                }
+
+                if(opcion == 2)
+                {
+                    Console.Clear();
+                    int j = 1;
+                   
+                    foreach (Persona x in personas)
+                    {
+                        Console.WriteLine(j + ".-");
+                        Console.WriteLine("Rut : " + x.Rut);
+                        Console.WriteLine("Nombre Completo : " + x.NombreCompleto());
+                        Console.WriteLine("Edad : " + x.Edad);
+                        Console.WriteLine("Notas : ");
+                        x.ListadoNotas();
+                        Console.WriteLine("Promedio : " + x.Promedio()+"\n");
+                        j = j + 1;
+                    }
+                }
+
+                if (opcion == 3)
+                {
+                    Console.WriteLine("Ingrese Rut a buscar: ");
+                    string RutBuscar = Console.ReadLine();
+
+                    Persona p = new Persona();
+
+                    p = personas.Where(x => x.Rut.Equals(RutBuscar)).FirstOrDefault();
+
+                    if (p == null)
+                    {
+                        Console.WriteLine("Persona NO existe");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Rut : " + p.Rut);
+                        Console.WriteLine("Nombre Completo : " + p.NombreCompleto());
+                        Console.WriteLine("Edad : " + p.Edad);
+                        Console.WriteLine("Notas : ");
+                        p.ListadoNotas();
+                        Console.WriteLine("Promedio : " + p.Promedio() + "\n");
+                    }
+
+                }
+
+
+
+            }
+        }
+    }
+}
