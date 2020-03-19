@@ -175,3 +175,4 @@ C:\Users\CARLOS\Source\Repos\.net-tarea\WebApplication2\bin\es\System.Web.WebPag
 C:\Users\CARLOS\Source\Repos\.net-tarea\WebApplication2\obj\Debug\WebApplication2.csproj.CopyComplete
 C:\Users\CARLOS\Source\Repos\.net-tarea\WebApplication2\obj\Debug\WebApplication2.dll
 C:\Users\CARLOS\Source\Repos\.net-tarea\WebApplication2\obj\Debug\WebApplication2.pdb
+C:\Users\CARLOS\source\repos\.net-tarea\WebApplication2\obj\Debug\WebApplication2.csprojAssemblyReference.cache

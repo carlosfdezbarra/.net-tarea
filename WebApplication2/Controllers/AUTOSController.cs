@@ -18,7 +18,54 @@ namespace WebApplication2.Controllers
         public ActionResult Index()
         {
             var aUTOS = db.AUTOS.Include(a => a.MODELO);
+
+            ViewBag.ID_MARCA = new SelectList(db.MARCA, "ID_MARCA", "DESCRIPCION");
+            var query = (from n in db.AUTOS
+                         select n.ANO
+                        ).Distinct()
+                        .OrderBy(ANO => ANO);
+
+
+            ViewBag.ID_AUTO = new SelectList(query);
             return View(aUTOS.ToList());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(int ID_MARCA, string patente, int ID_AUTO)
+        {
+            var query = (from n in db.AUTOS
+                         select n.ANO
+                        ).Distinct()
+                        .OrderBy(ANO => ANO);
+            var aUTOS = db.AUTOS.Include(a => a.MODELO);
+            ViewBag.ID_AUTO = new SelectList(query);
+            ViewBag.ID_MARCA = new SelectList(db.MARCA, "ID_MARCA", "DESCRIPCION");
+
+
+            if(patente == "")
+            {
+                var autitos = aUTOS.Where(x => x.MODELO.MARCA.ID_MARCA == ID_MARCA);
+                return View(autitos.Where(y=>y.ANO == ID_AUTO).ToList());
+            }
+            else
+            {
+                if (patente.Length < 3)
+                {
+
+                    ViewBag.ID_MODELO = (db.MODELO, "patente", "PATENTE");
+                    ModelState.AddModelError("patente", "Tiene que ingresar como mínimo 3 caracteres ");
+                    return View(aUTOS);
+                }
+                else
+                {
+                    var autitos = aUTOS.Where(x => x.MODELO.MARCA.ID_MARCA == ID_MARCA);
+                    var autitos2 = autitos.Where(y => y.ANO == ID_AUTO);
+                    return View(autitos2.Where(y => y.PATENTE.Contains(patente)).ToList());
+                }
+                    
+            }
+            
         }
 
         // GET: AUTOS/Details/5
