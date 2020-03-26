@@ -1,0 +1,49 @@
+﻿@model WebApplication2.Models.INGRESA_VEHICULO
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Está seguro de borrar este registro?</h3>
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Fecha ingreso
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.INGR_FECHA_INGRESO)
+        </dd>
+
+        <dt>
+            Rut
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.INGR_RUT_CLIENTE)
+        </dd>
+
+        <dt>
+            Patente
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AUTOS.PATENTE)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Volver", "Index")
+        </div>
+    }
+</div>

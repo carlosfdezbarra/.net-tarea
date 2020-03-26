@@ -4,7 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="testModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="testModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AUTO_SERVICIOS">
+          <Key>
+            <PropertyRef Name="SERVI_ID" />
+            <PropertyRef Name="INGR_ID" />
+          </Key>
+          <Property Name="SERVI_ID" Type="int" Nullable="false" />
+          <Property Name="INGR_ID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="AUTOS">
           <Key>
             <PropertyRef Name="ID_AUTO" />
@@ -22,6 +30,15 @@
           </Key>
           <Property Name="ID_CARGO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="INGRESA_VEHICULO">
+          <Key>
+            <PropertyRef Name="INGR_ID" />
+          </Key>
+          <Property Name="INGR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_AUTO" Type="int" />
+          <Property Name="INGR_FECHA_INGRESO" Type="datetime" />
+          <Property Name="INGR_RUT_CLIENTE" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="MARCA">
           <Key>
@@ -48,6 +65,14 @@
           <Property Name="apellido" Type="varchar" MaxLength="400" />
           <Property Name="edad" Type="int" />
         </EntityType>
+        <EntityType Name="SERVICIOS">
+          <Key>
+            <PropertyRef Name="SERVI_ID" />
+          </Key>
+          <Property Name="SERVI_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SERVI_DESCRIPCION" Type="varchar" MaxLength="100" />
+          <Property Name="SERVI_VALOR" Type="int" />
+        </EntityType>
         <EntityType Name="TRABAJADOR">
           <Key>
             <PropertyRef Name="ID_TRABAJADOR" />
@@ -59,6 +84,30 @@
           <Property Name="APELLIDOS" Type="varchar" MaxLength="300" />
           <Property Name="EDAD" Type="int" />
         </EntityType>
+        <Association Name="FK__AUTO_SERV__INGR___534D60F1">
+          <End Role="INGRESA_VEHICULO" Type="Self.INGRESA_VEHICULO" Multiplicity="1" />
+          <End Role="AUTO_SERVICIOS" Type="Self.AUTO_SERVICIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INGRESA_VEHICULO">
+              <PropertyRef Name="INGR_ID" />
+            </Principal>
+            <Dependent Role="AUTO_SERVICIOS">
+              <PropertyRef Name="INGR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AUTO_SERV__SERVI__52593CB8">
+          <End Role="SERVICIOS" Type="Self.SERVICIOS" Multiplicity="1" />
+          <End Role="AUTO_SERVICIOS" Type="Self.AUTO_SERVICIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIOS">
+              <PropertyRef Name="SERVI_ID" />
+            </Principal>
+            <Dependent Role="AUTO_SERVICIOS">
+              <PropertyRef Name="SERVI_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__AUTOS__ID_MODELO__34C8D9D1">
           <End Role="MODELO" Type="Self.MODELO" Multiplicity="0..1" />
           <End Role="AUTOS" Type="Self.AUTOS" Multiplicity="*" />
@@ -68,6 +117,18 @@
             </Principal>
             <Dependent Role="AUTOS">
               <PropertyRef Name="ID_MODELO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INGRESA_V__ID_AU__4F7CD00D">
+          <End Role="AUTOS" Type="Self.AUTOS" Multiplicity="0..1" />
+          <End Role="INGRESA_VEHICULO" Type="Self.INGRESA_VEHICULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AUTOS">
+              <PropertyRef Name="ID_AUTO" />
+            </Principal>
+            <Dependent Role="INGRESA_VEHICULO">
+              <PropertyRef Name="ID_AUTO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -96,15 +157,30 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="testModelStoreContainer">
+          <EntitySet Name="AUTO_SERVICIOS" EntityType="Self.AUTO_SERVICIOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AUTOS" EntityType="Self.AUTOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CARGOS" EntityType="Self.CARGOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INGRESA_VEHICULO" EntityType="Self.INGRESA_VEHICULO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MARCA" EntityType="Self.MARCA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MODELO" EntityType="Self.MODELO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SERVICIOS" EntityType="Self.SERVICIOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRABAJADOR" EntityType="Self.TRABAJADOR" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AUTO_SERV__INGR___534D60F1" Association="Self.FK__AUTO_SERV__INGR___534D60F1">
+            <End Role="INGRESA_VEHICULO" EntitySet="INGRESA_VEHICULO" />
+            <End Role="AUTO_SERVICIOS" EntitySet="AUTO_SERVICIOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AUTO_SERV__SERVI__52593CB8" Association="Self.FK__AUTO_SERV__SERVI__52593CB8">
+            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
+            <End Role="AUTO_SERVICIOS" EntitySet="AUTO_SERVICIOS" />
+          </AssociationSet>
           <AssociationSet Name="FK__AUTOS__ID_MODELO__34C8D9D1" Association="Self.FK__AUTOS__ID_MODELO__34C8D9D1">
             <End Role="MODELO" EntitySet="MODELO" />
             <End Role="AUTOS" EntitySet="AUTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INGRESA_V__ID_AU__4F7CD00D" Association="Self.FK__INGRESA_V__ID_AU__4F7CD00D">
+            <End Role="AUTOS" EntitySet="AUTOS" />
+            <End Role="INGRESA_VEHICULO" EntitySet="INGRESA_VEHICULO" />
           </AssociationSet>
           <AssociationSet Name="FK__MODELO__ID_MARCA__2C3393D0" Association="Self.FK__MODELO__ID_MARCA__2C3393D0">
             <End Role="MARCA" EntitySet="MARCA" />
@@ -115,8 +191,7 @@
             <End Role="TRABAJADOR" EntitySet="TRABAJADOR" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="testModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -131,6 +206,7 @@
           <Property Name="COLOR" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="OBSERVACION" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="MODELO" Relationship="Self.FK__AUTOS__ID_MODELO__34C8D9D1" FromRole="AUTOS" ToRole="MODELO" />
+          <NavigationProperty Name="INGRESA_VEHICULO" Relationship="testModel.FK__INGRESA_V__ID_AU__4F7CD00D" FromRole="AUTOS" ToRole="INGRESA_VEHICULO" />
         </EntityType>
         <EntityType Name="CARGOS">
           <Key>
@@ -235,7 +311,53 @@
             <End Role="MARCA" EntitySet="MARCA" />
             <End Role="MODELO" EntitySet="MODELO" />
           </AssociationSet>
+          <EntitySet Name="SERVICIOS" EntityType="testModel.SERVICIOS" />
+          <EntitySet Name="INGRESA_VEHICULO" EntityType="testModel.INGRESA_VEHICULO" />
+          <AssociationSet Name="FK__INGRESA_V__ID_AU__4F7CD00D" Association="testModel.FK__INGRESA_V__ID_AU__4F7CD00D">
+            <End Role="AUTOS" EntitySet="AUTOS" />
+            <End Role="INGRESA_VEHICULO" EntitySet="INGRESA_VEHICULO" />
+          </AssociationSet>
+          <AssociationSet Name="AUTO_SERVICIOS" Association="testModel.AUTO_SERVICIOS">
+            <End Role="INGRESA_VEHICULO" EntitySet="INGRESA_VEHICULO" />
+            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="SERVICIOS">
+          <Key>
+            <PropertyRef Name="SERVI_ID" />
+          </Key>
+          <Property Name="SERVI_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SERVI_DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SERVI_VALOR" Type="Int32" />
+          <NavigationProperty Name="INGRESA_VEHICULO" Relationship="testModel.AUTO_SERVICIOS" FromRole="SERVICIOS" ToRole="INGRESA_VEHICULO" />
+        </EntityType>
+        <EntityType Name="INGRESA_VEHICULO">
+          <Key>
+            <PropertyRef Name="INGR_ID" />
+          </Key>
+          <Property Name="INGR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_AUTO" Type="Int32" />
+          <Property Name="INGR_FECHA_INGRESO" Type="DateTime" Precision="3" />
+          <Property Name="INGR_RUT_CLIENTE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AUTOS" Relationship="testModel.FK__INGRESA_V__ID_AU__4F7CD00D" FromRole="INGRESA_VEHICULO" ToRole="AUTOS" />
+          <NavigationProperty Name="SERVICIOS" Relationship="testModel.AUTO_SERVICIOS" FromRole="INGRESA_VEHICULO" ToRole="SERVICIOS" />
+        </EntityType>
+        <Association Name="FK__INGRESA_V__ID_AU__4F7CD00D">
+          <End Type="testModel.AUTOS" Role="AUTOS" Multiplicity="0..1" />
+          <End Type="testModel.INGRESA_VEHICULO" Role="INGRESA_VEHICULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AUTOS">
+              <PropertyRef Name="ID_AUTO" />
+            </Principal>
+            <Dependent Role="INGRESA_VEHICULO">
+              <PropertyRef Name="ID_AUTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AUTO_SERVICIOS">
+          <End Type="testModel.INGRESA_VEHICULO" Role="INGRESA_VEHICULO" Multiplicity="*" />
+          <End Type="testModel.SERVICIOS" Role="SERVICIOS" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -302,6 +424,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SERVICIOS">
+            <EntityTypeMapping TypeName="testModel.SERVICIOS">
+              <MappingFragment StoreEntitySet="SERVICIOS">
+                <ScalarProperty Name="SERVI_VALOR" ColumnName="SERVI_VALOR" />
+                <ScalarProperty Name="SERVI_DESCRIPCION" ColumnName="SERVI_DESCRIPCION" />
+                <ScalarProperty Name="SERVI_ID" ColumnName="SERVI_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INGRESA_VEHICULO">
+            <EntityTypeMapping TypeName="testModel.INGRESA_VEHICULO">
+              <MappingFragment StoreEntitySet="INGRESA_VEHICULO">
+                <ScalarProperty Name="INGR_RUT_CLIENTE" ColumnName="INGR_RUT_CLIENTE" />
+                <ScalarProperty Name="INGR_FECHA_INGRESO" ColumnName="INGR_FECHA_INGRESO" />
+                <ScalarProperty Name="ID_AUTO" ColumnName="ID_AUTO" />
+                <ScalarProperty Name="INGR_ID" ColumnName="INGR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AUTO_SERVICIOS" TypeName="testModel.AUTO_SERVICIOS" StoreEntitySet="AUTO_SERVICIOS">
+            <EndProperty Name="SERVICIOS">
+              <ScalarProperty Name="SERVI_ID" ColumnName="SERVI_ID" />
+            </EndProperty>
+            <EndProperty Name="INGRESA_VEHICULO">
+              <ScalarProperty Name="INGR_ID" ColumnName="INGR_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

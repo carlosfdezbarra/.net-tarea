@@ -61,5 +61,32 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="SERVICIOS">
+      <EntityTypeMapping TypeName="testModel.SERVICIOS">
+        <MappingFragment StoreEntitySet="SERVICIOS">
+          <ScalarProperty Name="SERVI_VALOR" ColumnName="SERVI_VALOR" />
+          <ScalarProperty Name="SERVI_DESCRIPCION" ColumnName="SERVI_DESCRIPCION" />
+          <ScalarProperty Name="SERVI_ID" ColumnName="SERVI_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INGRESA_VEHICULO">
+      <EntityTypeMapping TypeName="testModel.INGRESA_VEHICULO">
+        <MappingFragment StoreEntitySet="INGRESA_VEHICULO">
+          <ScalarProperty Name="INGR_RUT_CLIENTE" ColumnName="INGR_RUT_CLIENTE" />
+          <ScalarProperty Name="INGR_FECHA_INGRESO" ColumnName="INGR_FECHA_INGRESO" />
+          <ScalarProperty Name="ID_AUTO" ColumnName="ID_AUTO" />
+          <ScalarProperty Name="INGR_ID" ColumnName="INGR_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AUTO_SERVICIOS" TypeName="testModel.AUTO_SERVICIOS" StoreEntitySet="AUTO_SERVICIOS">
+      <EndProperty Name="SERVICIOS">
+        <ScalarProperty Name="SERVI_ID" ColumnName="SERVI_ID" />
+      </EndProperty>
+      <EndProperty Name="INGRESA_VEHICULO">
+        <ScalarProperty Name="INGR_ID" ColumnName="INGR_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

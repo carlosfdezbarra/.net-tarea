@@ -14,6 +14,10 @@
         <AssociationConnector Association="testModel.FK__AUTOS__ID_MODELO__34C8D9D1" ManuallyRouted="false" />
         <AssociationConnector Association="testModel.FK__TRABAJADO__ID_CA__2D27B809" ManuallyRouted="false" />
         <AssociationConnector Association="testModel.FK__MODELO__ID_MARCA__2C3393D0" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="testModel.SERVICIOS" Width="1.5" PointX="11.25" PointY="1.25" />
+        <EntityTypeShape EntityType="testModel.INGRESA_VEHICULO" Width="1.5" PointX="8.25" PointY="1.875" />
+        <AssociationConnector Association="testModel.FK__INGRESA_V__ID_AU__4F7CD00D" />
+        <AssociationConnector Association="testModel.AUTO_SERVICIOS" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

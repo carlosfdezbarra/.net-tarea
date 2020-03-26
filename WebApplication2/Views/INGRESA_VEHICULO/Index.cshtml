@@ -1,0 +1,68 @@
+﻿@model IEnumerable<WebApplication2.Models.INGRESA_VEHICULO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Todos los vehículos con servicios</h2>
+
+<p>
+    @Html.ActionLink("Agregar", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Rut
+        </th>
+        <th>
+            Patente
+        </th>
+        <th>
+            Fecha ingreso
+        </th>
+        <th>
+            Valor total servicios
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        
+        @Html.DisplayFor(modelItem => item.INGR_RUT_CLIENTE)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.AUTOS.PATENTE)
+    </td>
+    <td>
+       
+        @Convert.ToDateTime(item.INGR_FECHA_INGRESO).ToString("dd/MM/yyyy")
+    </td>
+    
+        @*
+        @ViewBag.Total
+        @Html.DisplayFor(modelItem => item.SERVICIOS.Sum(x=>x.SERVI_VALOR))
+       
+        @foreach (var item2 in item.SERVICIOS)
+        {
+            @Html.DisplayFor(modelItem => item2.SERVI_VALOR)
+          
+            
+        }
+         *@
+    <td>@item.SERVICIOS.Sum(i => i.SERVI_VALOR)</td>
+        
+
+
+    
+    <td>
+        
+       
+        @Html.ActionLink("Eliminar", "Delete", new { id = item.INGR_ID })
+    </td>
+</tr>
+}
+
+</table>

@@ -31,5 +31,8 @@ namespace WebApplication2.Models
         public virtual DbSet<MODELO> MODELO { get; set; }
         public virtual DbSet<Persona> Persona { get; set; }
         public virtual DbSet<TRABAJADOR> TRABAJADOR { get; set; }
+        public virtual DbSet<SERVICIOS> SERVICIOS { get; set; }
+        public virtual DbSet<INGRESA_VEHICULO> INGRESA_VEHICULO { get; set; }
+        public object AUTO_SERVICIOS { get; internal set; }
     }
 }

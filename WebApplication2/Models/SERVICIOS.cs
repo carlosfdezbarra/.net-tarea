@@ -12,22 +12,18 @@ namespace WebApplication2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AUTOS
+    public partial class SERVICIOS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AUTOS()
+        public SERVICIOS()
         {
             this.INGRESA_VEHICULO = new HashSet<INGRESA_VEHICULO>();
         }
     
-        public int ID_AUTO { get; set; }
-        public string ID_MODELO { get; set; }
-        public string PATENTE { get; set; }
-        public Nullable<int> ANO { get; set; }
-        public string COLOR { get; set; }
-        public string OBSERVACION { get; set; }
+        public int SERVI_ID { get; set; }
+        public string SERVI_DESCRIPCION { get; set; }
+        public Nullable<int> SERVI_VALOR { get; set; }
     
-        public virtual MODELO MODELO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<INGRESA_VEHICULO> INGRESA_VEHICULO { get; set; }
     }

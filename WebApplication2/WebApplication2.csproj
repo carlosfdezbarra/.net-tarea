@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AUTOSController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\INGRESA_VEHICULOController.cs" />
     <Compile Include="Controllers\MARCAController.cs" />
     <Compile Include="Controllers\MODELOController.cs" />
     <Compile Include="Global.asax.cs">
@@ -139,6 +140,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CARGOS.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\INGRESA_VEHICULO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MARCA.cs">
@@ -165,6 +169,10 @@
     <Compile Include="Models\Persona.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SERVICIOS.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ServiciosB.cs" />
     <Compile Include="Models\TRABAJADOR.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -238,6 +246,11 @@
     <Content Include="Views\MARCA\Details.cshtml" />
     <Content Include="Views\MARCA\Edit.cshtml" />
     <Content Include="Views\MARCA\Index.cshtml" />
+    <Content Include="Views\INGRESA_VEHICULO\Create.cshtml" />
+    <Content Include="Views\INGRESA_VEHICULO\Delete.cshtml" />
+    <Content Include="Views\INGRESA_VEHICULO\Details.cshtml" />
+    <Content Include="Views\INGRESA_VEHICULO\Edit.cshtml" />
+    <Content Include="Views\INGRESA_VEHICULO\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

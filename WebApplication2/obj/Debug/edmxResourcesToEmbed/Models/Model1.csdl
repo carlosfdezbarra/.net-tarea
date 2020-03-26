@@ -11,6 +11,7 @@
     <Property Name="COLOR" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="OBSERVACION" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="MODELO" Relationship="Self.FK__AUTOS__ID_MODELO__34C8D9D1" FromRole="AUTOS" ToRole="MODELO" />
+    <NavigationProperty Name="INGRESA_VEHICULO" Relationship="testModel.FK__INGRESA_V__ID_AU__4F7CD00D" FromRole="AUTOS" ToRole="INGRESA_VEHICULO" />
   </EntityType>
   <EntityType Name="CARGOS">
     <Key>
@@ -115,5 +116,51 @@
       <End Role="MARCA" EntitySet="MARCA" />
       <End Role="MODELO" EntitySet="MODELO" />
     </AssociationSet>
+    <EntitySet Name="SERVICIOS" EntityType="testModel.SERVICIOS" />
+    <EntitySet Name="INGRESA_VEHICULO" EntityType="testModel.INGRESA_VEHICULO" />
+    <AssociationSet Name="FK__INGRESA_V__ID_AU__4F7CD00D" Association="testModel.FK__INGRESA_V__ID_AU__4F7CD00D">
+      <End Role="AUTOS" EntitySet="AUTOS" />
+      <End Role="INGRESA_VEHICULO" EntitySet="INGRESA_VEHICULO" />
+    </AssociationSet>
+    <AssociationSet Name="AUTO_SERVICIOS" Association="testModel.AUTO_SERVICIOS">
+      <End Role="INGRESA_VEHICULO" EntitySet="INGRESA_VEHICULO" />
+      <End Role="SERVICIOS" EntitySet="SERVICIOS" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="SERVICIOS">
+    <Key>
+      <PropertyRef Name="SERVI_ID" />
+    </Key>
+    <Property Name="SERVI_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SERVI_DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="SERVI_VALOR" Type="Int32" />
+    <NavigationProperty Name="INGRESA_VEHICULO" Relationship="testModel.AUTO_SERVICIOS" FromRole="SERVICIOS" ToRole="INGRESA_VEHICULO" />
+  </EntityType>
+  <EntityType Name="INGRESA_VEHICULO">
+    <Key>
+      <PropertyRef Name="INGR_ID" />
+    </Key>
+    <Property Name="INGR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_AUTO" Type="Int32" />
+    <Property Name="INGR_FECHA_INGRESO" Type="DateTime" Precision="3" />
+    <Property Name="INGR_RUT_CLIENTE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AUTOS" Relationship="testModel.FK__INGRESA_V__ID_AU__4F7CD00D" FromRole="INGRESA_VEHICULO" ToRole="AUTOS" />
+    <NavigationProperty Name="SERVICIOS" Relationship="testModel.AUTO_SERVICIOS" FromRole="INGRESA_VEHICULO" ToRole="SERVICIOS" />
+  </EntityType>
+  <Association Name="FK__INGRESA_V__ID_AU__4F7CD00D">
+    <End Type="testModel.AUTOS" Role="AUTOS" Multiplicity="0..1" />
+    <End Type="testModel.INGRESA_VEHICULO" Role="INGRESA_VEHICULO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AUTOS">
+        <PropertyRef Name="ID_AUTO" />
+      </Principal>
+      <Dependent Role="INGRESA_VEHICULO">
+        <PropertyRef Name="ID_AUTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AUTO_SERVICIOS">
+    <End Type="testModel.INGRESA_VEHICULO" Role="INGRESA_VEHICULO" Multiplicity="*" />
+    <End Type="testModel.SERVICIOS" Role="SERVICIOS" Multiplicity="*" />
+  </Association>
 </Schema>

@@ -1,0 +1,43 @@
+﻿@model WebApplication2.Models.INGRESA_VEHICULO
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>INGRESA_VEHICULO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.INGR_FECHA_INGRESO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.INGR_FECHA_INGRESO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.INGR_RUT_CLIENTE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.INGR_RUT_CLIENTE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AUTOS.ID_MODELO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AUTOS.ID_MODELO)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.INGR_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
